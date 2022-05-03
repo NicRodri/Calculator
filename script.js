@@ -1,6 +1,7 @@
 let currentNum = null;
 let previousNum = null;
 let operation = null;
+let decimalUse = false;
 displayValues = "";
 function add(a, b){
     return Number(a) + Number(b);
@@ -60,11 +61,22 @@ function storeNum(){ // Stores the currentNumber used for calculations
 }
 function calculator(){ // runs the calculator
     storeNum(); //Used to store and display numbers used
+
     const equals = document.getElementById("equals");
     const clear = document.getElementById("clear");
     const operators = document.querySelectorAll(".operation");
+    const decimal = document.getElementById(".");
 
-    operators.forEach((operator) =>{
+    decimal.addEventListener("click", () =>{ //adds the decimal functionality 
+        if(!decimalUse&& currentNum!= null){
+            displayValues+=decimal.innerHTML;
+            currentNum+= decimal.innerHTML;
+            displayValue();
+            decimalUse= true;
+            console.log(decimalUse);
+        }
+    });
+    operators.forEach((operator) =>{ // Takes actions onto numbers if an operator is clicked
         operator.addEventListener("click", () =>{
             displayValues += operator.innerHTML;
             displayValue();
@@ -85,30 +97,41 @@ function calculator(){ // runs the calculator
                 displayValues = "";
                 currentNum = null;
                 previousNum = null;
+                decimalUse = false;
                 displayValue();
             }
             operation = operator.id;
             console.log(operation);
+            decimalUse = false;
         });
     });
-    clear.addEventListener("click", () => {
+    clear.addEventListener("click", () => { // removes all stored and displayed numbers
         displayValues = "";
         currentNum = null;
         previousNum = null;
+        decimalUse = false;
         displayValue();
         console.log("current    " + currentNum);
         console.log("previous   " + previousNum);
     });
-    equals.addEventListener("click", () => {
+    equals.addEventListener("click", () => { // operates on the current pair of numbers
         console.log("current    " + currentNum);
         console.log("previous   " + previousNum);
         if(currentNum!= null && previousNum!= null){
-            if(previousNum =="Error Division by 0"){
-                alert("Division by 0!");
-            }
+
             displayValues = operate(operation, previousNum, currentNum);
             displayValue();
             currentNum = displayValues;
+
+            if(previousNum =="Error Division by 0" || currentNum =="Error Division by 0"){
+                alert("Division by 0!");
+                displayValues = "";
+                currentNum = null;
+                previousNum = null;
+                decimalUse = false;
+                displayValue();
+            }
+
             console.log("current    " + currentNum);
         }
     });
