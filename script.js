@@ -44,246 +44,176 @@ function calculator(){ //Runs the calculator
             return divide(a, b);
         }  
     }
+
     function displayValue(){ //Displays the screen with numbers and current operations
         const display = document.getElementById("display")
         display.innerHTML = displayValues;
     }
+    function storeNumFunction(input){ //Stores the currentNumber used for calculations  
+        displayValues += input;
+        if (currentNum == null){
+            currentNum = input;
+        }
+        else{
+            currentNum += input;
+        }
+        displayValue();
+    }
+    function backspaceFunction(){ //Adds backspace functionality to calculator
+        if(displayValues.charAt(displayValues.length -1) != operationDisplayed){
+            if(displayValues.charAt(displayValues.length -1) == "."){
+                decimalUse= false;
+            }
+            displayValues = displayValues.slice(0, -1);
+            displayValue();
+            currentNum = currentNum.slice(0, -1);
+        }
+    }
+    function decimalFunction(input){ //Adds the decimal functionality to calculator
+        if(decimalUse== false && currentNum!= "" && currentNum!= null && Number.isInteger(Number(currentNum))){
+            displayValues+=input;
+            currentNum+= input;
+            displayValue();
+            decimalUse= true;
+            console.log(decimalUse);
+        }
+
+    }
+    function equalsFunction(){ //Operates on the current pair of numbers based on last arithmetic operator used
+        console.log("current    " + currentNum);
+        console.log("previous   " + previousNum);
+        if(currentNum!= null && currentNum!="" && previousNum!= null && displayValues.charAt(displayValues.length -1) != "."){
+
+            displayValues = String(operate(operation, previousNum, currentNum));
+            displayValue();
+            currentNum = displayValues;
+            previousNum = null;
+
+            if(previousNum =="Error Division by 0" || currentNum =="Error Division by 0"){
+                alert("Division by 0!");
+                displayValues = "";
+                currentNum = null;
+                previousNum = null;
+                decimalUse = false;
+                displayValue();
+            }
+
+            console.log("current    " + currentNum);
+        }
+    }
+    function clearFunction(){ //Removes all stored and displayed numbers
+        displayValues = "";
+        currentNum = null;
+        previousNum = null;
+        decimalUse = false;
+        displayValue();
+        console.log("current    " + currentNum);
+        console.log("previous   " + previousNum);
+    }
+    function operatorsFunction(operationUsed, operatorDisplayed){ //Applies arithmetic operators and updates stored numbers
+        if(currentNum!=null&&currentNum!=""&& displayValues.charAt(displayValues.length -1) != "."){
+            displayValues += operatorDisplayed;
+
+            displayValue();
+                
+            if(previousNum == null){
+                previousNum = currentNum;
+                console.log("previous   " + previousNum); 
+            }
     
-    function storeNum(){ //Stores the currentNumber used for calculations
+            else{
+                previousNum = operate(operation, previousNum, currentNum);
+                console.log("previous   " + previousNum);
+            }
+            currentNum = null;
+    
+            if(previousNum == "Error Division by 0"){
+                alert("Error Division by 0!");
+                displayValues = "";
+                currentNum = null;
+                previousNum = null;
+                decimalUse = false;
+                displayValue();
+            }
+    
+            decimalUse = false;
+
+            operation = operationUsed;
+            operationDisplayed = operatorDisplayed;
+            console.log(operation);
+        }
+        
+    }
+
+    function storeNumButton(){ //Stores the currentNumber used for calculations using the buttons
         const numButtons = document.querySelectorAll(".num")
         numButtons.forEach((numButton) => {
             numButton.addEventListener("click", () =>{
-    
-                displayValues += numButton.id;
-                if (currentNum == null){
-                    currentNum = numButton.id;
-                }
-                else{
-                    currentNum += numButton.id;
-                }
-    
-                displayValue();
-                console.log("current    " + currentNum);
-                console.log("previous   " + previousNum);
+                storeNumFunction(numButton.id);
             });
         });
     }
-
-    function backspace(){ //Adds backspace functionality to calculator
+    function backspaceButton(){ //Adds backspace functionality to calculator using the button
         const backspace = document.getElementById("backspace");
         backspace.addEventListener("click", () =>{ 
-            if(displayValues.charAt(displayValues.length -1) != operationDisplayed){
-                if(displayValues.charAt(displayValues.length -1) == "."){
-                    decimalUse= false;
-                }
-                displayValues = displayValues.slice(0, -1);
-                displayValue();
-                currentNum = currentNum.slice(0, -1);
-            }
+            backspaceFunction();
         });
     }
-
-    function decimal(){ //Adds the decimal functionality to calculator
+    function decimalButton(){ //Adds the decimal functionality to calculator using the button
         const decimal = document.getElementById(".");
         decimal.addEventListener("click", () =>{ 
-            if(decimalUse== false && currentNum!= "" && currentNum!= null && Number.isInteger(Number(currentNum))){
-                displayValues+=decimal.innerHTML;
-                currentNum+= decimal.innerHTML;
-                displayValue();
-                decimalUse= true;
-                console.log(decimalUse);
-    
-            }
+            decimalFunction(decimal.innerHTML);
         });
     }
-
-    function equals(){ //Operates on the current pair of numbers based on last arithmetic operator used
+    function equalsButton(){ //Operates on the current pair of numbers based on last arithmetic operator used using the button
         const equals = document.getElementById("equals");
         equals.addEventListener("click", () => { 
-            console.log("current    " + currentNum);
-            console.log("previous   " + previousNum);
-            if(currentNum!= null && currentNum!="" && previousNum!= null && displayValues.charAt(displayValues.length -1) != "."){
-    
-                displayValues = String(operate(operation, previousNum, currentNum));
-                displayValue();
-                currentNum = displayValues;
-                previousNum = null;
-    
-                if(previousNum =="Error Division by 0" || currentNum =="Error Division by 0"){
-                    alert("Division by 0!");
-                    displayValues = "";
-                    currentNum = null;
-                    previousNum = null;
-                    decimalUse = false;
-                    displayValue();
-                }
-    
-                console.log("current    " + currentNum);
-            }
+            equalsFunction();
         });
     }
-
-    function clear(){ //Removes all stored and displayed numbers
+    function clearButton(){ //Removes all stored and displayed numbers using the button
         const clear = document.getElementById("clear");
         clear.addEventListener("click", () => { 
-            displayValues = "";
-            currentNum = null;
-            previousNum = null;
-            decimalUse = false;
-            displayValue();
-            console.log("current    " + currentNum);
-            console.log("previous   " + previousNum);
+            clearFunction();
         });
     }
-
-    function operators(){ //Applies arithmetic operators and updates stored numbers
+    function operatorButtons(){ //Applies arithmetic operators and updates stored numbers using the buttons
         const operators = document.querySelectorAll(".operation");
         operators.forEach((operator) =>{ 
             operator.addEventListener("click", () =>{
-                if(currentNum!=null&&currentNum!=""&& displayValues.charAt(displayValues.length -1) != "."){
-                    displayValues += operator.innerHTML;
-                    displayValue();
-                    
-                    if(previousNum == null){
-                        previousNum = currentNum;
-                        console.log("previous   " + previousNum); 
-                    }
-        
-                    else{
-                        previousNum = operate(operation, previousNum, currentNum);
-                        console.log("previous   " + previousNum);
-                    }
-                    currentNum = null;
-        
-                    if(previousNum == "Error Division by 0"){
-                        alert("Error Division by 0!");
-                        displayValues = "";
-                        currentNum = null;
-                        previousNum = null;
-                        decimalUse = false;
-                        displayValue();
-                    }
-                    operation = operator.id;
-                    operationDisplayed = operator.innerHTML;
-                    console.log(operation);
-                    decimalUse = false;
-                }
-    
+                operatorsFunction(operator.id, operator.innerHTML);
             });
         });
     }
-    storeNum(); //Used to store and display numbers used
-    backspace();
-    decimal();
-    equals();
-    clear();
-    operators();
-
-    
-
-    window.addEventListener("keydown", (e) =>{
-        if(e.key == 1|| e.key == 2 || e.key == 3 || e.key == 4 || e.key == 5 || e.key == 6 || e.key == 7 || e.key == 8 || e.key == 9 || e.key == 0){ //Numbers input
-            displayValues += e.key;
-            if (currentNum == null){
-                currentNum = e.key;
+    function readKeyboardInputs(){ //Allows for use of the calculator using keyboard inputs 
+        window.addEventListener("keydown", (e) =>{
+            if(e.key == 1|| e.key == 2 || e.key == 3 || e.key == 4 || e.key == 5 || e.key == 6 || e.key == 7 || e.key == 8 || e.key == 9 || e.key == 0){ //Numbers input
+                storeNumFunction(e.key);
             }
-            else{
-                currentNum += e.key;
+            else if(e.key == "Backspace"){ //Backspace input
+                backspaceFunction();
             }
-
-            displayValue();
-            console.log("current    " + currentNum);
-            console.log("previous   " + previousNum);
-        }
-        else if(e.key == "Backspace"){ //Backspace input
-            if(displayValues.charAt(displayValues.length -1) != operationDisplayed){
-                if(displayValues.charAt(displayValues.length -1) == "."){
-                    decimalUse= false;
-                }
-                displayValues = displayValues.slice(0, -1);
-                displayValue();
-                currentNum = currentNum.slice(0, -1);
+            else if(e.key == "."){ //Decimal input
+                decimalFunction(e.key);
             }
-
-        }
-        else if(e.key == "."){ //Decimal input
-            if(decimalUse== false && currentNum!= "" && currentNum!= null && Number.isInteger(Number(currentNum))){
-                displayValues+=e.key;
-                currentNum+= e.key;
-                displayValue();
-                decimalUse= true;
-                console.log(decimalUse);
+            else if(e.key == "Delete"){ //Clear input(uses delete button)
+                clearFunction();
             }
-        }
-        else if(e.key == "Delete"){ //Clear input(uses delete button)
-            displayValues = "";
-            currentNum = null;
-            previousNum = null;
-            decimalUse = false;
-            displayValue();
-            console.log("current    " + currentNum);
-            console.log("previous   " + previousNum);
-         
-        }
-        else if(e.key == "="|| e.key == "Enter"){ //Equals input
-
-            console.log("current    " + currentNum);
-            console.log("previous   " + previousNum);
-            if(currentNum!= null && currentNum!="" && previousNum!= null && displayValues.charAt(displayValues.length -1) != "."){
-    
-                displayValues = String(operate(operation, previousNum, currentNum));
-                displayValue();
-                currentNum = displayValues;
-                previousNum = null;
-    
-                if(previousNum =="Error Division by 0" || currentNum =="Error Division by 0"){
-                    alert("Division by 0!");
-                    displayValues = "";
-                    currentNum = null;
-                    previousNum = null;
-                    decimalUse = false;
-                    displayValue();
-                }
-    
-                console.log("current    " + currentNum);
+            else if(e.key == "="|| e.key == "Enter"){ //Equals input
+                equalsFunction();
             }
-        }
-        else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/"){ //Operation input
-            if(currentNum!=null&&currentNum!=""&& displayValues.charAt(displayValues.length -1) != "."){
-                displayValues += e.key;
-                displayValue();
-                
-                if(previousNum == null){
-                    previousNum = currentNum;
-                    console.log("previous   " + previousNum); 
-                }
-    
-                else{
-                    previousNum = operate(operation, previousNum, currentNum);
-                    console.log("previous   " + previousNum);
-                }
-                currentNum = null;
-    
-                if(previousNum == "Error Division by 0"){
-                    alert("Error Division by 0!");
-                    displayValues = "";
-                    currentNum = null;
-                    previousNum = null;
-                    decimalUse = false;
-                    displayValue();
-                }
-                operation = e.key;
-                operationDisplayed = e.key;
-                console.log(operation);
-                decimalUse = false;
+            else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/"){ //Operation input  
+                operatorsFunction(e.key, e.key); 
             }
-            console.log("operation");
-        }
-    });
-
-
-
-
+        });
+    }
+    storeNumButton(); 
+    backspaceButton();
+    decimalButton();
+    equalsButton();
+    clearButton();
+    operatorButtons();
+    readKeyboardInputs();
 
 }
 
