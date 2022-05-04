@@ -16,6 +16,9 @@ h1{
     border-radius: 5px;
 }
 #display{
+    display: flex;
+    justify-content: end;
+    align-items: flex-end;
     background-color: lightblue;
     width: 461px;
     height: 150px;
@@ -24,6 +27,8 @@ h1{
     padding: 5px;
     border: 2px solid black;
     border-radius: 5px;
+    font-size: 60px;
+    
 }
 #container1{
     display: flex;
@@ -56,6 +61,8 @@ h1{
 }
 #clear{
     background-color: rgb(226, 176, 176);
+    font-size: xx-large;
+    font-weight: 500;
 }
 .num{
     background-color: rgb(250, 234, 215);
@@ -66,19 +73,31 @@ h1{
 #backspace{
     background-color: rgb(249, 250, 215);
 }
+.defaultFormat{
+    font-size: xx-large;
+    font-weight: 500;
+}
 .defaultSquare{
     width: 75px;
     height: 75px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 .defaultRectangle{
     width: 235px;
     height: 75px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 .defaultSquareOperation{
     width: 115px;
     height: 115px; 
+    border: 2px solid black;
+    border-radius: 5px;
 }
 #equals{
     width: 315px;
     height: 75px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
