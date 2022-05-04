@@ -12,15 +12,15 @@ function calculator(){ //Runs the calculator
     
     function add(a, b){ //Adds two numbers
         let num = Number(a) + Number(b);
-        return +num.toFixed(10);// Used toFixed used to round numbers. Rounding is inaccurate with values ending in 5 over 10 digits.
+        return +num.toFixed(6);// Used toFixed used to round numbers. Rounding is inaccurate with values ending in 5 over 10 digits.
     }
     function subtract(a, b){ //Subtracts two numbers
         let num = Number(a) - Number(b);
-        return +num.toFixed(10);
+        return +num.toFixed(6);
     }
     function multiply(a, b){ //Multiplies two numbers
         let num = Number(a) * Number(b);
-        return +num.toFixed(10);
+        return +num.toFixed(6);
     }
     function divide(a, b){ //Divides two numbers
         
@@ -29,7 +29,7 @@ function calculator(){ //Runs the calculator
         }
         else{
             let num = Number(a) / Number(b);
-            return +num.toFixed(10);
+            return +num.toFixed(6);
         }
     }
     
@@ -40,7 +40,7 @@ function calculator(){ //Runs the calculator
         else if(operator == "subtract" || operator == "-"){
             return subtract(a, b);
         }
-        else if(operator == "multiply" || operator ==  "x"){
+        else if(operator == "multiply" || operator ==  "×"){
             return multiply(a, b);
         }
         else if(operator == "divide" || operator == "÷"){
@@ -206,7 +206,7 @@ function calculator(){ //Runs the calculator
             }
             else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/"){ //Operation input  
                 if(e.key == "*"){
-                    operatorsFunction("x", "x");
+                    operatorsFunction("×", "×");
                 }
                 else if(e.key == "/"){
                     operatorsFunction("÷", "÷");
