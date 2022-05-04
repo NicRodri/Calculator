@@ -6,6 +6,7 @@ function calculator(){ //Runs the calculator
     let operationDisplayed = null; //Keeps track of the arithmetic operation displayed
     let decimalUse = false; //Keeps track of whether a decimal has been used or not
     let equalsPressed = false; //Keeps track of whether the equals has been used or not
+    let canBackspace = true; //Keeps track of whether you can backspace or not
     displayValues = ""; //Used to keep track of items on the display
     
     function add(a, b){ //Adds two numbers
@@ -38,10 +39,10 @@ function calculator(){ //Runs the calculator
         else if(operator == "subtract" || operator == "-"){
             return subtract(a, b);
         }
-        else if(operator == "multiply" || operator ==  "*"){
+        else if(operator == "multiply" || operator ==  "x"){
             return multiply(a, b);
         }
-        else if(operator == "divide" || operator == "/"){
+        else if(operator == "divide" || operator == "÷"){
             return divide(a, b);
         }  
     }
@@ -63,7 +64,7 @@ function calculator(){ //Runs the calculator
         }  
     }
     function backspaceFunction(){ //Adds backspace functionality to calculator
-        if(displayValues.charAt(displayValues.length -1) != operationDisplayed){
+        if(displayValues.charAt(displayValues.length -1) != operationDisplayed && canBackspace){
             if(displayValues.charAt(displayValues.length -1) == "."){
                 decimalUse= false;
             }
@@ -101,6 +102,7 @@ function calculator(){ //Runs the calculator
                 displayValue();
             }
             equalsPressed = true;
+            canBackspace = false;
             console.log("current    " + currentNum);
         }
     }
@@ -109,6 +111,8 @@ function calculator(){ //Runs the calculator
         currentNum = null;
         previousNum = null;
         decimalUse = false;
+        equalsPressed = false;
+        canBackspace = true;
         displayValue();
         console.log("current    " + currentNum);
         console.log("previous   " + previousNum);
@@ -138,7 +142,8 @@ function calculator(){ //Runs the calculator
                 decimalUse = false;
                 displayValue();
             }
-    
+            
+            canBackspace = true;
             decimalUse = false;
             equalsPressed = false;
             operation = operationUsed;
@@ -206,7 +211,15 @@ function calculator(){ //Runs the calculator
                 equalsFunction();
             }
             else if(e.key == "+" || e.key == "-" || e.key == "*" || e.key == "/"){ //Operation input  
-                operatorsFunction(e.key, e.key); 
+                if(e.key == "*"){
+                    operatorsFunction("x", "x");
+                }
+                else if(e.key == "/"){
+                    operatorsFunction("÷", "÷");
+                }
+                else{
+                    operatorsFunction(e.key, e.key);
+                }
             }
         });
     }
