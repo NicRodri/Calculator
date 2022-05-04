@@ -1,0 +1,70 @@
+h1{
+    text-align: center;
+    font-weight: 1000;
+}
+#containerAll{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    background-color: rgb(223, 223, 223);
+    width: 515px;
+    height: 629px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid rgb(119, 119, 119);
+    border-radius: 5px;
+}
+
+#display{
+    background-color: lightblue;
+    width: 461px;
+    height: 150px;
+    margin: 20px;
+    margin-bottom: 0px;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+#container1{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+#inputs{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 20px;
+}
+#row0.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.defaultSquare{
+    width: 75px;
+    height: 75px;
+}
+.defaultRectangle{
+    width: 235px;
+    height: 75px;
+}
+.defaultSquareOperation{
+    width: 115px;
+    height: 115px; 
+}
+#equals{
+    width: 315px;
+    height: 75px;
+}

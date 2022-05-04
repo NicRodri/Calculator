@@ -4,33 +4,76 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <div id="display">0</div>
-    <div id="numbers">
-        <button id="0" class="num">0</button>
-        <button id="1" class="num">1</button>
-        <button id="2" class="num">2</button>
-        <button id="3" class="num">3</button>
-        <button id="4" class="num">4</button>
-        <button id="5" class="num">5</button>
-        <button id="6" class="num">6</button>
-        <button id="7" class="num">7</button>
-        <button id="8" class="num">8</button>
-        <button id="9" class="num">9</button>
-    </div>
-    
-    <div id="operators">
-        <button id="." class="decimal">.</button>
-        <button id="add" class="operation">+</button>
-        <button id="subtract" class="operation">-</button>
-        <button id="multiply" class="operation">x</button>
-        <button id="divide" class="operation">÷</button>
-        <button id="equals">=</button>
-        <button id="clear">clear</button>
-        <button id="backspace">backspace</button>
-    </div>
+    <h1>Calculator</h1>
+    <div id="containerAll">
+        <div id="display">0</div>
+        <div id="inputs">
+            <div id="row0" class="row">
+                <button id="clear" class="defaultRectangle">clear</button>
+                <button id="backspace" class="defaultRectangle">backspace</button>
+            </div>
+            <div id="container1">
+                <div class="left column">
+                    <div id="row1" class="row">
+                        <button id="7" class="num defaultSquare">7</button>
+                        <button id="8" class="num defaultSquare">8</button>
+                        <button id="9" class="num defaultSquare">9</button>
+
+                    </div>
+                    <div id="row2" class="row">
+                        <button id="4" class="num defaultSquare">4</button>
+                        <button id="5" class="num defaultSquare">5</button>
+                        <button id="6" class="num defaultSquare">6</button>
+                    </div>
+                    <div id="row3" class="row">
+                        <button id="1" class="num defaultSquare">1</button>
+                        <button id="2" class="num defaultSquare">2</button>
+                        <button id="3" class="num defaultSquare">3</button>
+
+                    </div>
+                </div>
+                <div class="right column">
+                    <div class="row">
+                        <button id="multiply" class="operation defaultSquareOperation">x</button>
+                        <button id="divide" class="operation defaultSquareOperation">÷</button>
+                    </div>
+                    <div class="row">
+                        <button id="add" class="operation defaultSquareOperation">+</button>
+                        <button id="subtract" class="operation defaultSquareOperation">-</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="row4" class="row">
+                <button id="0" class="num defaultSquare">0</button>
+                <button id="." class="decimal defaultSquare">.</button>
+                <button id="equals" >=</button>
+
+
+            </div>
+            <div id="numbers">
+                
+                
+                
+
+
+            </div>
+            <div id="operators">
+                
+
+
+
+
+            </div>
+        </div>
+        </div>
+        
+
 
 <script src="script.js"></script>   
 </body>
