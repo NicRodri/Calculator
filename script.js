@@ -86,7 +86,7 @@ function calculator(){ //Runs the calculator
     function decimal(){ //Adds the decimal functionality to calculator
         const decimal = document.getElementById(".");
         decimal.addEventListener("click", () =>{ 
-            if(decimalUse== false && currentNum!= null){
+            if(decimalUse== false && currentNum!= "" && currentNum!= null && Number.isInteger(Number(currentNum))){
                 displayValues+=decimal.innerHTML;
                 currentNum+= decimal.innerHTML;
                 displayValue();
@@ -207,7 +207,7 @@ function calculator(){ //Runs the calculator
 
         }
         else if(e.key == "."){ //Decimal input
-            if(decimalUse == false  && currentNum!= null){
+            if(decimalUse== false && currentNum!= "" && currentNum!= null && Number.isInteger(Number(currentNum))){
                 displayValues+=e.key;
                 currentNum+= e.key;
                 displayValue();
