@@ -79,13 +79,10 @@ function calculator(){ //Runs the calculator
             currentNum+= input;
             displayValue();
             decimalUse= true;
-            console.log(decimalUse);
         }
 
     }
     function equalsFunction(){ //Operates on the current pair of numbers based on last arithmetic operator used
-        console.log("current    " + currentNum);
-        console.log("previous   " + previousNum);
         if(currentNum!= null && currentNum!="" && previousNum!= null && displayValues.charAt(displayValues.length -1) != "."){
 
             displayValues = String(operate(operation, previousNum, currentNum));
@@ -103,7 +100,6 @@ function calculator(){ //Runs the calculator
             }
             equalsPressed = true;
             canBackspace = false;
-            console.log("current    " + currentNum);
         }
     }
     function clearFunction(){ //Removes all stored and displayed numbers
@@ -114,26 +110,18 @@ function calculator(){ //Runs the calculator
         equalsPressed = false;
         canBackspace = true;
         displayValue();
-        console.log("current    " + currentNum);
-        console.log("previous   " + previousNum);
     }
     function operatorsFunction(operationUsed, operatorDisplayed){ //Applies arithmetic operators and updates stored numbers
         if(currentNum!=null&&currentNum!=""&& displayValues.charAt(displayValues.length -1) != "."){
             displayValues += operatorDisplayed;
-
             displayValue();
-                
+    
             if(previousNum == null){
                 previousNum = currentNum;
-                console.log("previous   " + previousNum); 
             }
-    
             else{
                 previousNum = operate(operation, previousNum, currentNum);
-                console.log("previous   " + previousNum);
             }
-            currentNum = null;
-    
             if(previousNum == "Error Division by 0"){
                 alert("Error Division by 0!");
                 displayValues = "";
@@ -143,12 +131,12 @@ function calculator(){ //Runs the calculator
                 displayValue();
             }
             
+            currentNum = null;
             canBackspace = true;
             decimalUse = false;
             equalsPressed = false;
             operation = operationUsed;
             operationDisplayed = operatorDisplayed;
-            console.log(operation);
         }
         
     }
