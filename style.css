@@ -15,9 +15,10 @@ h1{
     border: 2px solid rgb(119, 119, 119);
     border-radius: 5px;
 }
-#display{
+#displayContainer{
     display: flex;
-    justify-content: end;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: flex-end;
     background-color: lightblue;
     width: 461px;
@@ -26,9 +27,22 @@ h1{
     margin-bottom: 0px;
     padding: 5px;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 5px; 
+    word-wrap: break-word;
+}
+#topDisplay{
+    text-align: end;
+    font-size: 30px; 
+    width: 461px;
+    overflow: auto;
+}
+#display{
+    text-align: end;
     font-size: 60px;
-    
+    width: 461px;
+    min-height: 69px;
+    white-space: nowrap; 
+    overflow: hidden;
 }
 #container1{
     display: flex;

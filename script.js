@@ -7,7 +7,8 @@ function calculator(){ //Runs the calculator
     let decimalUse = false; //Keeps track of whether a decimal has been used or not
     let equalsPressed = false; //Keeps track of whether the equals has been used or not
     let canBackspace = true; //Keeps track of whether you can backspace or not
-    displayValues = ""; //Used to keep track of items on the display
+    let displayValues = ""; //Used to keep track of items on the display
+    let topDisplayValues = ""; //Used to keep track of items on the top of the display
     
     function add(a, b){ //Adds two numbers
         let num = Number(a) + Number(b);
@@ -49,11 +50,15 @@ function calculator(){ //Runs the calculator
 
     function displayValue(){ //Displays the screen with numbers and current operations
         const display = document.getElementById("display")
+        const topDisplay = document.getElementById("topDisplay");
         display.innerHTML = displayValues;
+        topDisplay.innerHTML = topDisplayValues;
+
     }
     function storeNumFunction(input){ //Stores the currentNumber used for calculations
         if(!equalsPressed){
             displayValues += input;
+            topDisplayValues += input;
             if (currentNum == null){
                 currentNum = input;
             }
@@ -69,6 +74,7 @@ function calculator(){ //Runs the calculator
                 decimalUse= false;
             }
             displayValues = displayValues.slice(0, -1);
+            topDisplayValues = topDisplayValues.slice(0, -1);
             displayValue();
             currentNum = currentNum.slice(0, -1);
         }
@@ -76,6 +82,7 @@ function calculator(){ //Runs the calculator
     function decimalFunction(input){ //Adds the decimal functionality to calculator
         if(decimalUse== false && currentNum!= "" && currentNum!= null && Number.isInteger(Number(currentNum))){
             displayValues+=input;
+            topDisplayValues+=input;
             currentNum+= input;
             displayValue();
             decimalUse= true;
@@ -89,21 +96,18 @@ function calculator(){ //Runs the calculator
             displayValue();
             currentNum = displayValues;
             previousNum = null;
+            equalsPressed = true;
+            canBackspace = false;
 
             if(previousNum =="Error Division by 0" || currentNum =="Error Division by 0"){
                 alert("Division by 0!");
-                displayValues = "";
-                currentNum = null;
-                previousNum = null;
-                decimalUse = false;
-                displayValue();
+                clearFunction();
             }
-            equalsPressed = true;
-            canBackspace = false;
         }
     }
     function clearFunction(){ //Removes all stored and displayed numbers
         displayValues = "";
+        topDisplayValues = "";
         currentNum = null;
         previousNum = null;
         decimalUse = false;
@@ -114,6 +118,7 @@ function calculator(){ //Runs the calculator
     function operatorsFunction(operationUsed, operatorDisplayed){ //Applies arithmetic operators and updates stored numbers
         if(currentNum!=null&&currentNum!=""&& displayValues.charAt(displayValues.length -1) != "."){
             displayValues += operatorDisplayed;
+            topDisplayValues += operatorDisplayed;
             displayValue();
     
             if(previousNum == null){
@@ -125,6 +130,7 @@ function calculator(){ //Runs the calculator
             if(previousNum == "Error Division by 0"){
                 alert("Error Division by 0!");
                 displayValues = "";
+                topDisplayValues = "";
                 currentNum = null;
                 previousNum = null;
                 decimalUse = false;
@@ -158,7 +164,7 @@ function calculator(){ //Runs the calculator
     function decimalButton(){ //Adds the decimal functionality to calculator using the button
         const decimal = document.getElementById(".");
         decimal.addEventListener("click", () =>{ 
-            decimalFunction(decimal.innerHTML);
+            decimalFunction(decimal.id);
         });
     }
     function equalsButton(){ //Operates on the current pair of numbers based on last arithmetic operator used using the button
