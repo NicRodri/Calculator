@@ -1,25 +1,26 @@
 
 function calculator(){ //Runs the calculator
-    let currentNum = null;
-    let previousNum = null;
-    let operation = null;
-    let operationDisplayed = null;
-    let decimalUse = false;
-    displayValues = "";
+    let currentNum = null; //Keeps track of the current number pressed
+    let previousNum = null; //Keeps track of the previous number pressed
+    let operation = null; //Keeps track of the current arithmetic operation
+    let operationDisplayed = null; //Keeps track of the arithmetic operation displayed
+    let decimalUse = false; //Keeps track of whether a decimal has been used or not
+    let equalsPressed = false; //Keeps track of whether the equals has been used or not
+    displayValues = ""; //Used to keep track of items on the display
     
-    function add(a, b){
+    function add(a, b){ //Adds two numbers
         let num = Number(a) + Number(b);
         return +num.toFixed(10);// Used toFixed used to round numbers. Rounding is inaccurate with values ending in 5 over 10 digits.
     }
-    function subtract(a, b){
+    function subtract(a, b){ //Subtracts two numbers
         let num = Number(a) - Number(b);
         return +num.toFixed(10);
     }
-    function multiply(a, b){
+    function multiply(a, b){ //Multiplies two numbers
         let num = Number(a) * Number(b);
         return +num.toFixed(10);
     }
-    function divide(a, b){
+    function divide(a, b){ //Divides two numbers
         
         if(b == 0){
             return "Error Division by 0";
@@ -30,7 +31,7 @@ function calculator(){ //Runs the calculator
         }
     }
     
-    function operate(operator, a, b){    
+    function operate(operator, a, b){ //Applies arithmetic operation given to it  
         if(operator == "add"|| operator == "+"){
             return add(a, b);
         }
@@ -49,15 +50,17 @@ function calculator(){ //Runs the calculator
         const display = document.getElementById("display")
         display.innerHTML = displayValues;
     }
-    function storeNumFunction(input){ //Stores the currentNumber used for calculations  
-        displayValues += input;
-        if (currentNum == null){
-            currentNum = input;
-        }
-        else{
-            currentNum += input;
-        }
-        displayValue();
+    function storeNumFunction(input){ //Stores the currentNumber used for calculations
+        if(!equalsPressed){
+            displayValues += input;
+            if (currentNum == null){
+                currentNum = input;
+            }
+            else{
+                currentNum += input;
+            }
+            displayValue();
+        }  
     }
     function backspaceFunction(){ //Adds backspace functionality to calculator
         if(displayValues.charAt(displayValues.length -1) != operationDisplayed){
@@ -97,7 +100,7 @@ function calculator(){ //Runs the calculator
                 decimalUse = false;
                 displayValue();
             }
-
+            equalsPressed = true;
             console.log("current    " + currentNum);
         }
     }
@@ -137,7 +140,7 @@ function calculator(){ //Runs the calculator
             }
     
             decimalUse = false;
-
+            equalsPressed = false;
             operation = operationUsed;
             operationDisplayed = operatorDisplayed;
             console.log(operation);
