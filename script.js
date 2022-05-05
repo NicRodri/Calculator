@@ -12,15 +12,15 @@ function calculator(){ //Runs the calculator
     
     function add(a, b){ //Adds two numbers
         let num = Number(a) + Number(b);
-        return +num.toFixed(6);// Used toFixed used to round numbers. Rounding is inaccurate with values ending in 5 over 10 digits.
+        return +num.toFixed(10);// Used toFixed used to round numbers. Rounding is inaccurate with values ending in 5 over 10 digits.
     }
     function subtract(a, b){ //Subtracts two numbers
         let num = Number(a) - Number(b);
-        return +num.toFixed(6);
+        return +num.toFixed(10);
     }
     function multiply(a, b){ //Multiplies two numbers
         let num = Number(a) * Number(b);
-        return +num.toFixed(6);
+        return +num.toFixed(10);
     }
     function divide(a, b){ //Divides two numbers
         
@@ -29,7 +29,7 @@ function calculator(){ //Runs the calculator
         }
         else{
             let num = Number(a) / Number(b);
-            return +num.toFixed(6);
+            return +num.toFixed(10);
         }
     }
     
