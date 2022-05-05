@@ -51,8 +51,8 @@ function calculator(){ //Runs the calculator
     function displayValue(){ //Displays the screen with numbers and current operations
         const display = document.getElementById("display")
         const topDisplay = document.getElementById("topDisplay");
-        display.innerHTML = displayValues;
-        topDisplay.innerHTML = topDisplayValues;
+        display.textContent = displayValues;
+        topDisplay.textContent = topDisplayValues;
 
     }
     function storeNumFunction(input){ //Stores the currentNumber used for calculations
@@ -183,7 +183,7 @@ function calculator(){ //Runs the calculator
         const operators = document.querySelectorAll(".operation");
         operators.forEach((operator) =>{ 
             operator.addEventListener("click", () =>{
-                operatorsFunction(operator.id, operator.innerHTML);
+                operatorsFunction(operator.id, operator.textContent);
             });
         });
     }
