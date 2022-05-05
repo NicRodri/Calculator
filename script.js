@@ -98,6 +98,7 @@ function calculator(){ //Runs the calculator
             previousNum = null;
             equalsPressed = true;
             canBackspace = false;
+            decimalUse = true;
 
             if(previousNum =="Error Division by 0" || currentNum =="Error Division by 0"){
                 alert("Division by 0!");
